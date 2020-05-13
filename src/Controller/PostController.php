@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Form\PostType;
+use App\Services\FileUploader;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,7 +18,7 @@ class PostController extends AbstractController
         ]);
     }
 
-    public function create(Request $request) 
+    public function create(Request $request, FileUploader $fileUploader) 
     {
         $post = new Post();
         $post->setUuid();
@@ -30,7 +31,18 @@ class PostController extends AbstractController
             $post = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $post->setCreatedAt();
-            
+
+            /* @var UploadedFile $file */
+            $file = $request->files->get('post')['trackname'];
+
+            if($file) {
+  
+                $filename = $fileUploader->updateFile($file, 'audio');
+                
+                $post->setTrackname($filename);
+  
+            }
+
             $em->persist($post);
             $em->flush();
 

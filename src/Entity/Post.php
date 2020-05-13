@@ -37,6 +37,21 @@ class Post
      */
     private $trackname;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=false)
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $deletedAt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -47,9 +62,9 @@ class Post
         return $this->uuid;
     }
 
-    public function setUuid(string $uuid): self
+    public function setUuid()
     {
-        $this->uuid = $uuid;
+        $this->uuid = uniqid('MB_');
 
         return $this;
     }
@@ -89,4 +104,41 @@ class Post
 
         return $this;
     }
+    
+    public function getCreatedAt(): ?\DateTime
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt()
+    {
+        $this->createdAt = new \DateTime();
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTime
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTime $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getDeletedAt(): ?\DateTime
+    {
+        return $this->deletedAt;
+    }
+
+    public function setDeletedAt(\DateTime $deletedAt): self
+    {
+        $this->deletedAt = $deletedAt;
+
+        return $this;
+    }
+    
 }

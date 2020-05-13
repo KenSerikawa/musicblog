@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Form\PostType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,15 +29,15 @@ class PostController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $post = $form->getData();
             $em = $this->getDoctrine()->getManager();
-            $post->setCreatedAt(new \DateTime());
+            $post->setCreatedAt();
             
             $em->persist($post);
             $em->flush();
 
-            return $this->redirectToRoute('posts');
+            return $this->redirectToRoute('post.index');
         }
 
-        return $this->render('project/form.html.twig', [
+        return $this->render('post/form.html.twig', [
             'form' => $form->createView()
         ]);
 

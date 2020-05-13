@@ -5,3 +5,7 @@ index:
 post.index: 
     path: /posts
     controller: App\Controller\PostController::index
+
+post.create: 
+    path: /posts/new
+    controller: App\Controller\PostController::create

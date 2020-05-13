@@ -1,3 +1,7 @@
 index:
     path: /
     controller: App\Controller\HomeController::index
+
+post.index: 
+    path: /posts
+    controller: App\Controller\PostController::index

@@ -29,15 +29,7 @@ class PostType extends AbstractType
                 ]
             ])
             ->add('trackname', FileType::class, [
-                'constraints' => [
-                    new File([
-                        'maxSize' => '1024k',
-                        'mimeTypes' => [
-                            'application/mp3'
-                        ],
-                        'mimeTypesMessage' => 'Please upload a valid MP3 file',
-                    ])
-                ],
+                
             ])
             ->add('save', SubmitType::class)
         ;

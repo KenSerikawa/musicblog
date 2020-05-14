@@ -5,16 +5,26 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Services\FileUploader;
+use App\Repository\PostRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PostController extends AbstractController
 {
+    private $repository;
+
+    public function __construct(PostRepository $postRepository)
+    {
+        $this->repository = $postRepository;
+    }
     public function index()
     {
+        $posts = $this->repository->findAll();
+        
+
         return $this->render('post/index.html.twig', [
-            'controller_name' => 'PostController',
+            'posts' => $posts
         ]);
     }
 

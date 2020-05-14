@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\PostRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Repository\PostRepository;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)

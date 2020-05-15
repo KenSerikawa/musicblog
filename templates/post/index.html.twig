@@ -7,15 +7,18 @@
 
 {% for post in posts %}
     <div class="mt-4">
+        
         <p class="h3">
             {{post.name}} 
         </p>
-            <em>{{post.createdAt|date()}}</em>
+
+            <audio controls class="" width="300" height="32" >
+                <source src="{{asset('uploads/audio/') ~ post.trackname }}">
+            </audio>
         
         <p class="h6">{{post.description}}</p>
-        <audio controls class="" width="300" height="32" >
-            <source src="{{asset('uploads/audio/') ~ post.trackname }}">
-        </audio>
+        <em>{{post.createdAt|date()}}</em>
+   
     </div>
 {% endfor %}
 

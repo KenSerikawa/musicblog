@@ -1,9 +1,5 @@
-index:
-    path: /
-    controller: App\Controller\HomeController::index
-
 post.index: 
-    path: /posts
+    path: /
     controller: App\Controller\PostController::index
 
 post.create: 

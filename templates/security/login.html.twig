@@ -3,10 +3,10 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<div class="row">
+<div class="row mt-5">
     <div class="col-4">
     </div>
-    <div class="col-4">
+    <div class="col-4 mt-4 pt-3">
         <form method="post">
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -18,7 +18,7 @@
                 </div>
             {% endif %}
 
-            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Log in</h1>
             <label for="inputEmail">Email</label>
             <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
             <label for="inputPassword">Password</label>

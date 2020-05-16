@@ -19,3 +19,8 @@
 ###> symfony/web-server-bundle ###
 /.web-server-pid
 ###< symfony/web-server-bundle ###
+
+###> uploads ###
+/public/uploads/audio/
+/public/uploads/images/
+###< uploads ###

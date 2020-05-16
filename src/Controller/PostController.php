@@ -9,14 +9,16 @@ use App\Repository\PostRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class PostController extends AbstractController
 {
     private $repository;
 
-    public function __construct(PostRepository $postRepository)
+    public function __construct(PostRepository $postRepository, TokenStorageInterface $tokenStorage)
     {
         $this->repository = $postRepository;
+        $this->user = $tokenStorage->getToken()->getUser();
     }
     
     public function index()
@@ -32,6 +34,7 @@ class PostController extends AbstractController
     {
         $post = new Post();
         $post->setUuid();
+        $post->setUser($this->user);
 
         $form = $this->createForm(PostType::class, $post);
         
@@ -46,11 +49,8 @@ class PostController extends AbstractController
             $file = $request->files->get('post')['trackname'];
 
             if($file) {
-  
                 $filename = $fileUploader->updateFile($file, 'audio');
-                
                 $post->setTrackname($filename);
-  
             }
 
             $em->persist($post);

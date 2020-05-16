@@ -1,28 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PostController!{% endblock %}
+{% block title %}MusicLover{% endblock %}
 
 {% block body %}
 
-
 {% for post in posts %}
-    <div class="mt-4">
-        
-        <p class="h3">
-            {{post.name}} 
-        </p>
+    <div class="p-3 row border">
+        <div class="col-2">
+
+            <img class="img-thumbnail" 
+            {% if post.imagename is null %}
+            src="{{asset('/default/track-img.jpg')}}" alt="default image"
+            {% else %}
+            src="{{asset('/uploads/images/' ~ post.imagename )}}" alt="{{post.name}}"
+            {% endif %}
+            >
+
+        </div>
+        <div class="col-10 border">
+            
+            <div class="col-8 mt-2">
+                <p class="h3">
+                    {{post.name}} 
+                </p>
+                <p class="h6">
+                    {{post.description}}
+                </p>
+                {% if post.user is null %} 
+                {% else %}
+                <p class="h6"> by {{post.user.nickname}}
+                    <em>{{post.createdAt|date()}}</em>
+                </p>
+                {% endif %}
+            </div>
+            <div class="col-2">
+            </div>
+            <div class="col-2">
+            </div>
 
             <audio class="w-100" controls class="" width="300" height="32" >
                 <source src="{{asset('uploads/audio/') ~ post.trackname }}">
             </audio>
-        
-        <p class="h6">{{post.description}}</p>
-        {% if post.user is null %} 
-        {% else %}
-        <p class="h6"> by {{post.user.nickname}}</p>
-        {% endif %}
-        <em>{{post.createdAt|date()}}</em>
-   
+
+        </div>
     </div>
 {% endfor %}
 

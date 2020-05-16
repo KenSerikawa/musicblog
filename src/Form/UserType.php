@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -28,6 +29,12 @@ class UserType extends AbstractType
         ])
         ->add('email', EmailType::class, [
             'required' => true
+        ])
+        ->add('profile_image', FileType::class, [
+            'required' => false,
+            "label" => "Imagen:",
+            "attr" =>array("class" => "form-control"),
+            "data_class" => null
         ])
         ->add('register', SubmitType::class)
         ;

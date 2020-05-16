@@ -5,7 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     uploads_audio: '%kernel.project_dir%/public/uploads/audio'
-    uploads_image: '%kernel.project_dir%/public/uploads/images'
+    uploads_images: '%kernel.project_dir%/public/uploads/images'
 
 services:
     # default configuration for services in *this* file

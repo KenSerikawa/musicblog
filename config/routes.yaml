@@ -4,7 +4,19 @@ app_login:
 
 app_register:
     path: /register
-    controller: App\Controller\UserController:register
+    controller: App\Controller\UserController::register
+
+user.index: 
+    path: /users
+    controller: App\Controller\UserController::index
+
+user.profile: 
+    path: /profile/{id}
+    controller: App\Controller\UserController::show
+
+user.update: 
+    path: /profile/edit/{id}
+    controller: App\Controller\UserController::update
 
 post.index: 
     path: /

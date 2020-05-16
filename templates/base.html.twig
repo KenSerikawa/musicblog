@@ -4,20 +4,26 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/custom.css">
         {% block stylesheets %}{% endblock %}
-
     </head>
     <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light ">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-        <div class="container">
+    {% if app.user is null %}
+    {# Leave empty for now #}
+    {% else %}
 
+    <nav class="navbar navbar-expand-lg navbar-light ">
+
+        <div class="container">
+            
             <div class="collapse navbar-collapse">
+                <h1 class="ml7">    
+                    <span class="text-wrapper">
+                        <a id="brand"class="navbar-brand letters" href="{{path('post.index')}}">MusicLover</a>
+                    </span>
+                </h1>
                 
-                <a class="navbar-brand" href="{{path('post.index')}}">MusicLover</a>
                 {# 
                 <ul class="navbar-nav">
                     <li class="nav-item active" >
@@ -26,39 +32,81 @@
                 </ul> 
                 #}
             </div>
+            <div class="menu">            
+            <ol class="navbar-nav">
+
+                <li class="nav-item active menu-item" >
             
-            {% if app.user is null %}
-            {% else %}
+                    <a class="nav-link" href="{{path('post.create')}}">+</a>
             
-            <ul class="navbar-nav">
+                </li>
+
+                <li class="nav-item active menu-item" >
             
-                <li class="nav-item active" >
+                    <a class="nav-link" href="{{path('post.index')}}">Posts</a>
+            
+                </li>
+
+                <li class="nav-item active menu-item" >
+            
+                    <a class="nav-link" href="{{path('user.profile', {id: app.user.id})}}">User</a>
+            
+                </li>
+
+                <li class="nav-item active menu-item" >
             
                     <a class="nav-link" href="{{path('app_logout')}}">Log out</a>
             
                 </li>
             
-            </ul> 
+            </ol> 
+            </div>
             
-            {% endif %}
-
-            </nav>
-
         </div>
+
+    </nav>
+
+    {% endif %}
         
-        <div class="container">
+    <div class="container">
 
         {% include 'flash_messages.html.twig' %}
 
         {% block body %}{% endblock %}
 
-        </div>
+    </div>
 
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        
-        {% block javascripts %}{% endblock %}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    {% block javascripts %}{% endblock %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+
+    <script>
+        // Wrap every letter in a span
+        var textWrapper = document.querySelector('.ml7 .letters');
+        textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+        anime.timeline({loop: false})
+        .add({
+            targets: '.ml7 .letter',
+            translateY: ["1.1em", 0],
+            translateX: ["0.55em", 0],
+            translateZ: 0,
+            rotateZ: [180, 0],
+            duration: 2500,
+            easing: "easeOutExpo",
+            delay: (el, i) => 50 * i
+        })
+        {# .add({
+            targets: '.ml7',
+            opacity: 0,
+            duration: 1000,
+            easing: "easeOutExpo",
+            delay: 1000
+        }) #};
+    </script>
 
     </body>
 </html>

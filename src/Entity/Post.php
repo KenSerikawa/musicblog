@@ -38,6 +38,12 @@ class Post
      */
     private $trackname;
 
+   
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="post")
+     */
+    private $user;
+
     /**
      * @ORM\Column(type="datetime", nullable=false)
      */

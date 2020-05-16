@@ -31,6 +31,10 @@ class PostType extends AbstractType
             ->add('trackname', FileType::class, [
                 
             ])
+            ->add('imagename', FileType::class, [
+                'required' => false,
+                'label' => 'Track image (not required)',
+            ])
             ->add('save', SubmitType::class)
         ;
     }

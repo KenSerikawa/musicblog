@@ -45,12 +45,18 @@ class PostController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $post->setCreatedAt();
 
-            /* @var UploadedFile $file */
-            $file = $request->files->get('post')['trackname'];
+            $trackfile = $request->files->get('post')['trackname'];
 
-            if($file) {
-                $filename = $fileUploader->updateFile($file, 'audio');
+            if($trackfile) {
+                $filename = $fileUploader->updateFile($trackfile, 'audio');
                 $post->setTrackname($filename);
+            }
+
+            $imagefile = $request->files->get('post')['imagename'];
+
+            if($imagefile) {
+                $filename = $fileUploader->updateFile($imagefile, 'images');
+                $post->setImagename($filename);
             }
 
             $em->persist($post);

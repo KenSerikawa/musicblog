@@ -17,6 +17,10 @@
             </audio>
         
         <p class="h6">{{post.description}}</p>
+        {% if post.user is null %} 
+        {% else %}
+        <p class="h6"> by {{post.user.nickname}}</p>
+        {% endif %}
         <em>{{post.createdAt|date()}}</em>
    
     </div>

@@ -38,7 +38,11 @@ class Post
      */
     private $trackname;
 
-   
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $imagename;
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="post")
      */
@@ -120,6 +124,18 @@ class Post
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getImagename(): ?string
+    {
+        return $this->imagename;
+    }
+
+    public function setImagename(string $imagename): self
+    {
+        $this->imagename = $imagename;
 
         return $this;
     }

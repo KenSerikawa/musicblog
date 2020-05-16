@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profile{% endblock %}
-
 {% block body %}
     <div class="row mt-4">
     
@@ -9,7 +7,9 @@
             <h3>{{user.nickname}}</h3>
             <h5>{{user.email}}</h5>
 
+            {% if app.user == user %}
             <a role="button" class="btn btn-primary" href="{{path('user.update', {id: user.id})}}">Update</a>
+            {% endif %}
         </div>
 
         <div class="col-4">

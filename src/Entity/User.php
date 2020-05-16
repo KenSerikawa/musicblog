@@ -50,6 +50,11 @@ class User implements UserInterface
      */
     private $post;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $profile_image;
+
     public function __construct()
     {
         
@@ -155,5 +160,17 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getProfileImage(): ?string
+    {
+        return $this->profile_image;
+    }
+
+    public function setProfileImage(string $image_name): self
+    {
+        $this->profile_image = $image_name;
+
+        return $this;
     }
 }

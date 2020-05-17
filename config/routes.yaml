@@ -25,3 +25,11 @@ post.index:
 post.create: 
     path: /posts/new
     controller: App\Controller\PostController::create
+
+category.index:
+    path: /categories
+    controller: App\Controller\CategoryController::index
+
+category.create:
+    path: /categories/new
+    controller: App\Controller\CategoryController::save

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\PostRepository;
 use App\Repository\UserRepository;
 use App\Services\FileUploader;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,15 +28,21 @@ class UserController extends AbstractController
         ]);
     }
 
-    public function show(int $id)
+    public function show(int $id, PostRepository $postRepository)
     {
         $user = $this->repository->find($id);
+        // WATCH! Another solution could be better  
+        $user_posts = $postRepository->findBy(['user' => $id]);
         return $this->render('user/profile.html.twig', [
-            'user' => $user
+            'user' => $user,
+            'posts' => $user_posts
         ]);
     }
 
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, FileUploader $fileUploader)
+    public function register(
+        Request $request, 
+        UserPasswordEncoderInterface $passwordEncoder, 
+        FileUploader $fileUploader)
     {
         $newUser = new User();
         $newUser->setUuid();

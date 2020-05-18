@@ -30,7 +30,7 @@ class PostController extends AbstractController
         ]);
     }
 
-    public function create(Request $request, FileUploader $fileUploader) 
+    public function create(Request $request, FileUploader $fileUploader, CategoryController $categoryController) 
     {
         $post = new Post();
         $post->setUuid();
@@ -44,6 +44,10 @@ class PostController extends AbstractController
             $post = $form->getData();
             $em = $this->getDoctrine()->getManager();
             $post->setCreatedAt();
+
+            if($post->getCategory() !== null) {
+                $categoryController->saveFromPost($post->getCategory());
+            }
 
             $trackfile = $request->files->get('post')['trackname'];
 

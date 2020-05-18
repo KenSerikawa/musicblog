@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
+use App\Entity\Category;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\PostRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
@@ -47,6 +48,11 @@ class Post
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="post")
      */
     private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="post")
+     */
+    private $category;
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
@@ -136,6 +142,18 @@ class Post
     public function setImagename(string $imagename): self
     {
         $this->imagename = $imagename;
+
+        return $this;
+    }
+    
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

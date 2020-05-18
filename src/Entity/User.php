@@ -51,6 +51,11 @@ class User implements UserInterface
     private $post;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Category", mappedBy="user")
+     */
+    private $category;
+
+    /**
      * @ORM\Column(type="string", nullable=true)
      */
     private $profile_image;

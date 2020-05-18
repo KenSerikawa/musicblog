@@ -1,12 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PostController!{% endblock %}
+{% block title %}Create new category{% endblock %}
 
     {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
-
-
-    {{form(form)}}
+    <div class="row">
+        <div class="col-4">
+        </div>
+        <div class="col-4">
+        {{form(form)}}
+        </div>
+    </div>
 
 {% endblock %}

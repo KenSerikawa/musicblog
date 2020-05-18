@@ -5,10 +5,10 @@
 {% block body %}
 
 {% for post in posts %}
-    <div class="p-3 row border">
+    <div class="p-3 row border  rounded mt-2">
         <div class="col-2">
 
-            <img class="img-thumbnail" 
+            <img class="img-thumbnail mt-2" 
             {% if post.imagename is null %}
             src="{{asset('/default/track-img.jpg')}}" alt="default image"
             {% else %}
@@ -17,7 +17,7 @@
             >
 
         </div>
-        <div class="col-10 border">
+        <div class="col-10 ">
             
             <div class="col-8 mt-2">
                 <p class="h3">
@@ -28,7 +28,10 @@
                 </p>
                 {% if post.user is null %} 
                 {% else %}
-                <p class="h6"> by {{post.user.nickname}}
+                <p class="h6"> 
+                    Uploaded by 
+                    <a href="{{path('user.profile', {id: post.user.id})}}">{{post.user.nickname}}
+                    </a>
                     <em>{{post.createdAt|date()}}</em>
                 </p>
                 {% endif %}

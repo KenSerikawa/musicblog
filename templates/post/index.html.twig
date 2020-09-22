@@ -3,23 +3,10 @@
 {% block title %}MusicLover{% endblock %}
 
 {% block body %}
-
 {% for post in posts %}
-    <div class="p-3 row border  rounded mt-2">
-        <div class="col-2">
-
-            <img class="img-thumbnail mt-2" 
-            {% if post.imagename is null %}
-            src="{{asset('/default/track-img.jpg')}}" alt="default image"
-            {% else %}
-            src="{{asset('/uploads/images/' ~ post.imagename )}}" alt="{{post.name}}"
-            {% endif %}
-            >
-
-        </div>
-        <div class="col-10 ">
-            
-            <div class="col-8 mt-2">
+    <div class="p-3 row  mt-2">
+        <div class="col-12">
+      {#         <div class="col-12 mt-2">
                 <p class="h3">
                     {{post.name}} 
                 </p>
@@ -35,16 +22,47 @@
                     <em>{{post.createdAt|date()}}</em>
                 </p>
                 {% endif %}
+            </div> #}
+            <div class="audio-player">
+                <div class="timeline">
+                    <div class="progress"></div>
+                </div>
+                <div class="d-flex">
+                    <img class="mt-2 rounded" 
+                        {% if post.imagename is null %}
+                        src="{{asset('/default/track-img.jpg')}}" alt="default image"
+                        {% else %}
+                        src="{{asset('/uploads/images/' ~ post.imagename )}}" alt="{{post.name}}"
+                        {% endif %}
+                        width="200px" height="200px">           
+                    <div class="controls">
+                        <div class="play-container">
+                            <div class="toggle-play play">
+                            </div>
+                        </div>
+                        <div class="time">
+                            <div class="current">0:00</div>
+                            <div class="divider">/</div>
+                            <div class="length"></div>
+                        </div>
+                        <div class="name"> {{post.name}}</div>
+                        <div class="volume-container">
+                            <div class="volume-button">
+                                <div class="volume icono-volumeMedium"></div>
+                            </div>
+                            
+                            <div class="volume-slider">
+                                <div class="volume-percentage"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-2">
+            <div class="d-none">
+                <audio class="w-100" controls class="" >
+                    <source src="{{asset('uploads/audio/') ~ post.trackname }}">
+                </audio>
             </div>
-            <div class="col-2">
-            </div>
-
-            <audio class="w-100" controls class="" width="300" height="32" >
-                <source src="{{asset('uploads/audio/') ~ post.trackname }}">
-            </audio>
-
         </div>
     </div>
 {% endfor %}

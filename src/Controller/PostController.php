@@ -15,9 +15,9 @@ class PostController extends AbstractController
 {
     private $repository;
 
-    public function __construct(PostRepository $postRepository, TokenStorageInterface $tokenStorage)
+    public function __construct(PostRepository $repository, TokenStorageInterface $tokenStorage)
     {
-        $this->repository = $postRepository;
+        $this->repository = $repository;
         $this->user = $tokenStorage->getToken()->getUser();
     }
     
@@ -32,9 +32,8 @@ class PostController extends AbstractController
 
     public function create(Request $request, FileUploader $fileUploader, CategoryController $categoryController) 
     {
-        $post = new Post();
+        $post = new Post($this->user);
         $post->setUuid();
-        $post->setUser($this->user);
 
         $form = $this->createForm(PostType::class, $post);
         

@@ -1,9 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=DM+Serif+Text&family=Plaster&display=swap');
 
+html, body {
+    height: 100%;
+}
 /* Fonts */
-
 body {
     font-family:'Comfortaa', cursive;
+    background-color: #333333;
+    color: white;
+}
+a {
+    color: white;
+    text-decoration: none;
 }
 .navbar-brand {
     font-family: 'Plaster', cursive !important;
@@ -29,6 +37,7 @@ body {
     transform-origin: 0 100%;
     display: inline-block;
     line-height: 1em;
+    text-shadow: 2px 12px rgb(177, 177, 177, .5);
 }
 
 /* Menu item */
